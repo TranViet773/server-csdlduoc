@@ -1,0 +1,56 @@
+{
+  "received_at": "2026-10-10T14:34:08.905Z",
+  "transaction_id": "PN-20261010-6473",
+  "reference_number": "HD-TEMP-1234",
+  "raw_body_received": {
+    "reference_number": "HD-TEMP-1234",
+    "items": [
+      {
+        "drug_id": "VN-22019-19",
+        "unit_id": "U001",
+        "quantity": 10,
+        "batch_no": "B123",
+        "expiry_date": "2028-01-01",
+        "price": 1000
+      }
+    ]
+  },
+  "saved_transaction": {
+    "transaction_id": "PN-20261010-6473",
+    "transaction_date": "2026-10-10T14:34:08",
+    "import_date": "2026-10-10",
+    "reason": "supplier",
+    "reference_number": "HD-TEMP-1234",
+    "invoice_date": "2026-10-10",
+    "practice_license_code": "GCN-NT-01294",
+    "note": "",
+    "status": "accepted",
+    "is_synced": false,
+    "items": [
+      {
+        "drug_id": "VN-22019-19",
+        "unit_id": "U001",
+        "quantity": 10,
+        "batch_no": "B123",
+        "expiry_date": "2028-01-01",
+        "price": 1000,
+        "drug_name": "Panadol Extra Đỏ",
+        "registration_number": "VN-22019-19",
+        "unit_name": "Viên",
+        "batch_number": "B123",
+        "packaging_specifications": "Viên, Vỉ, Hộp",
+        "total_price": 10000,
+        "manufacturer": {
+          "id": "NSX01",
+          "name": "GlaxoSmithKline Dungarvan Ltd.",
+          "country": "IRL",
+          "address": "Knockbrack, Dungarvan, Co. Waterford, Ireland"
+        },
+        "is_custom_drug": false
+      }
+    ],
+    "total_amount": 10000,
+    "created_at": "2026-10-10T14:34:08.902Z",
+    "updated_at": "2026-10-10T14:34:08.902Z"
+  }
+}

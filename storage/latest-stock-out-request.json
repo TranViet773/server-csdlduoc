@@ -1,0 +1,121 @@
+{
+  "received_at": "2026-10-10T13:32:25.367Z",
+  "transaction_id": "PX-20261010-8716",
+  "reference_number": "ABC",
+  "raw_body_received": {
+    "transaction_id": "PX-20261010-511",
+    "transaction_date": "2026-10-10T13:21",
+    "export_date": "2026-10-10",
+    "reason": "other",
+    "reference_number": "ABC",
+    "practice_license_code": "GCN-NT-01294",
+    "note": "abc",
+    "partner_name": "Khách lẻ",
+    "items": [
+      {
+        "drug_id": "VN-19821-16",
+        "drug_name": "Nexium Mups 40mg",
+        "registration_number": "VN-19821-16",
+        "unit_id": "U001",
+        "unit_name": "Viên",
+        "quantity": 6,
+        "batch_no": "NX2311",
+        "batch_number": "NX2311",
+        "packaging_specifications": "Hộp 4 vỉ x 7 viên",
+        "expiry_date": "2028-01-05",
+        "price": 16500,
+        "total_price": 99000
+      },
+      {
+        "drug_id": "VN-18543-14",
+        "drug_name": "Augmentin 625mg",
+        "registration_number": "VN-18543-14",
+        "unit_id": "U001",
+        "unit_name": "Viên",
+        "quantity": 1,
+        "batch_no": "24B01",
+        "batch_number": "24B01",
+        "packaging_specifications": "Hộp 2 vỉ x 7 viên",
+        "expiry_date": "2026-11-28",
+        "price": 16000,
+        "total_price": 16000
+      },
+      {
+        "drug_id": "VN-18543-14",
+        "drug_name": "Augmentin 625mg",
+        "registration_number": "VN-18543-14",
+        "unit_id": "U002",
+        "unit_name": "Vỉ",
+        "quantity": 1,
+        "batch_no": "AUG2601",
+        "batch_number": "AUG2601",
+        "packaging_specifications": "Hộp 2 vỉ x 7 viên",
+        "expiry_date": "2028-05-30",
+        "price": 110000,
+        "total_price": 110000
+      }
+    ]
+  },
+  "saved_transaction": {
+    "transaction_id": "PX-20261010-8716",
+    "transaction_date": "2026-10-10T13:21",
+    "export_date": "2026-10-10",
+    "reason": "other",
+    "supplier_name": "Khách lẻ",
+    "reference_number": "ABC",
+    "practice_license_code": "GCN-NT-01294",
+    "note": "abc",
+    "status": "accepted",
+    "is_synced": false,
+    "items": [
+      {
+        "drug_id": "VN-19821-16",
+        "drug_name": "Nexium Mups 40mg",
+        "registration_number": "VN-19821-16",
+        "unit_id": "U001",
+        "unit_name": "Viên",
+        "quantity": 6,
+        "batch_no": "NX2311",
+        "batch_number": "NX2311",
+        "packaging_specifications": "Hộp 4 vỉ x 7 viên",
+        "expiry_date": "2028-01-05",
+        "price": 16500,
+        "total_price": 99000,
+        "is_custom_drug": false
+      },
+      {
+        "drug_id": "VN-18543-14",
+        "drug_name": "Augmentin 625mg",
+        "registration_number": "VN-18543-14",
+        "unit_id": "U001",
+        "unit_name": "Viên",
+        "quantity": 1,
+        "batch_no": "24B01",
+        "batch_number": "24B01",
+        "packaging_specifications": "Hộp 2 vỉ x 7 viên",
+        "expiry_date": "2026-11-28",
+        "price": 16000,
+        "total_price": 16000,
+        "is_custom_drug": false
+      },
+      {
+        "drug_id": "VN-18543-14",
+        "drug_name": "Augmentin 625mg",
+        "registration_number": "VN-18543-14",
+        "unit_id": "U002",
+        "unit_name": "Vỉ",
+        "quantity": 1,
+        "batch_no": "AUG2601",
+        "batch_number": "AUG2601",
+        "packaging_specifications": "Hộp 2 vỉ x 7 viên",
+        "expiry_date": "2028-05-30",
+        "price": 110000,
+        "total_price": 110000,
+        "is_custom_drug": false
+      }
+    ],
+    "total_amount": 225000,
+    "created_at": "2026-10-10T13:32:25.364Z",
+    "updated_at": "2026-10-10T13:32:25.364Z"
+  }
+}

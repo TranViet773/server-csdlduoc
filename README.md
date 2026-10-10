@@ -22,11 +22,17 @@ ServerCSDL/
 │   │   │   ├── master.controller.ts
 │   │   │   ├── master.service.ts
 │   │   │   └── master.module.ts
-│   │   └── phieu-nhap/        # Module phiếu nhập (/phieu-nhap & CRUD & liên thông)
-│   │       ├── phieu-nhap.controller.ts
-│   │       ├── phieu-nhap.service.ts
-│   │       ├── phieu-nhap.dto.ts
-│   │       └── phieu-nhap.module.ts
+│   │   ├── phieu-nhap/        # Module phiếu nhập (/phieu-nhap & CRUD & liên thông)
+│   │   │   ├── phieu-nhap.controller.ts
+│   │   │   ├── phieu-nhap.service.ts
+│   │   │   ├── phieu-nhap.dto.ts
+│   │   │   └── phieu-nhap.module.ts
+│   │   └── phieu-xuat/        # Module phiếu xuất (/phieu-xuat & CRUD & lưu trữ persistent)
+│   │       ├── phieu-xuat.controller.ts
+│   │       ├── phieu-xuat.service.ts
+│   │       ├── phieu-xuat.dto.ts
+│   │       └── phieu-xuat.module.ts
+│   ├── storage/               # Thư mục tự động lưu phiếu xuất (.json) để kiểm tra
 │   ├── app.controller.ts      # Endpoint root thông tin server
 │   ├── app.service.ts
 │   ├── app.module.ts
@@ -53,7 +59,21 @@ Server chạy tại: **`http://localhost:3001`** (Đã kích hoạt CORS sẵn s
 
 Server hỗ trợ đồng thời cả **Endpoint thân thiện (tiếng Việt)** và **Endpoint chuẩn Quyết định 806 (v2)**:
 
-### 1. Quản Lý Phiếu Nhập Hàng
+### 1. Quản Lý Phiếu Xuất Hàng (Stock-Out) - *Mục 5.4.4 - 5.4.6 QĐ 806*
+
+> *Yêu cầu Header:* `Authorization: Bearer <access_token>`
+
+| Hành động | Endpoint thân thiện | Chuẩn QĐ 806 (v2) | Phương thức |
+| :--- | :--- | :--- | :--- |
+| **Lấy danh sách phiếu xuất** | `/phieu-xuat` | `/transactions/stock-out` | `GET` |
+| **Chi tiết phiếu xuất** | `/phieu-xuat/:id` | `/transactions/stock-out/:id` | `GET` |
+| **Tạo phiếu xuất mới (Lưu file)** | `/phieu-xuat` | `/transactions/stock-out` | `POST` |
+| **Sửa phiếu xuất (chưa sync)** | `/phieu-xuat/:id` | `/transactions/stock-out/:id` | `PUT` |
+| **Xóa phiếu xuất (chưa sync)** | `/phieu-xuat/:id` | `/transactions/stock-out/:id` | `DELETE` |
+| **Liên thông lên CSDL Dược QG** | `/phieu-xuat/lien-thong` hoặc `/:id/lien-thong` | `/transactions/stock-out/:id/sync` | `POST` |
+| **Xem trạng thái xử lý** | `/phieu-xuat/:id/status` | `/transactions/stock-out/:id/status` | `GET` |
+
+### 2. Quản Lý Phiếu Nhập Hàng (Stock-In) - *Mục 5.4.1 - 5.4.3 QĐ 806*
 
 | Hành động | Endpoint thân thiện | Chuẩn QĐ 806 (v2) | Phương thức |
 | :--- | :--- | :--- | :--- |
@@ -65,7 +85,8 @@ Server hỗ trợ đồng thời cả **Endpoint thân thiện (tiếng Việt)*
 | **Liên thông lên CSDL Dược QG** | `/phieu-nhap/lien-thong` hoặc `/phieu-nhap/:id/lien-thong` | `/transactions/stock-in/:id/sync` | `POST` |
 | **Xem trạng thái xử lý** | `/phieu-nhap/:id/status` | `/transactions/stock-in/:id/status` | `GET` |
 
-### 2. Danh Mục Dùng Chung (Master Data)
+### 3. Danh Mục Dùng Chung (Master Data)
+
 
 | Danh mục | Endpoint thân thiện | Chuẩn QĐ 806 (v2) | Phương thức |
 | :--- | :--- | :--- | :--- |

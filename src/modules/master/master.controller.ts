@@ -42,8 +42,9 @@ export class MasterController {
     };
   }
 
-  // 5. Danh mục nhà cung cấp: GET /nha-cung-cap, GET /master/suppliers
-  @Get(['nha-cung-cap', 'master/suppliers'])
+  // 5. Danh mục nhà cung cấp: GET /nha-cung-cap, GET /master/suppliers, GET /v2/master/suppliers
+  @Get(['nha-cung-cap', 'master/suppliers', 'v2/master/suppliers'])
+
   getSuppliers() {
     return {
       total: this.masterService.getSuppliers().length,

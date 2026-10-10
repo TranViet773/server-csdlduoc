@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -6,8 +10,31 @@ export class AuthService {
     const { username, password } = body;
     if (!username || !password) {
       throw new BadRequestException({
-        error: 'INVALID_CREDENTIALS',
+        statusCode: 400,
+        error: 'INVALID_REQUEST',
+        message: 'Thiếu tên đăng nhập hoặc mật khẩu (theo mục 5.1 Quyết định 806)',
         error_description: 'Thiếu tên đăng nhập hoặc mật khẩu (theo mục 5.1 Quyết định 806)',
+      });
+    }
+
+    let isPasswordMatch = password === 'password123';
+    if (!isPasswordMatch) {
+      try {
+        const decoded = Buffer.from(password, 'base64').toString('utf-8');
+        if (decoded === 'password123') {
+          isPasswordMatch = true;
+        }
+      } catch {
+        // bỏ qua lỗi decode base64
+      }
+    }
+
+    if (username !== 'nhathuoc_viet' || !isPasswordMatch) {
+      throw new UnauthorizedException({
+        statusCode: 401,
+        error: 'INVALID_CREDENTIALS',
+        message: 'Tên đăng nhập hoặc mật khẩu không chính xác',
+        error_description: 'Tên đăng nhập hoặc mật khẩu không chính xác',
       });
     }
 

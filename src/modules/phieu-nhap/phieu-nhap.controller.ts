@@ -17,8 +17,22 @@ export class PhieuNhapController {
 
   // 1. Lấy danh sách phiếu nhập: GET /phieu-nhap hoặc GET /transactions/stock-in
   @Get(['phieu-nhap', 'transactions/stock-in', 'v2/transactions/stock-in'])
-  findAll(@Query('search') search?: string, @Query('q') q?: string) {
-    return this.phieuNhapService.findAll(search || q);
+  findAll(
+    @Query('search') search?: string,
+    @Query('q') q?: string,
+    @Query('status') status?: string,
+    @Query('is_synced') isSynced?: string,
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.phieuNhapService.findAll({
+      search,
+      q,
+      status,
+      is_synced: isSynced,
+      page,
+      page_size: pageSize,
+    });
   }
 
   // 2. Liên thông phiếu nhập: POST /phieu-nhap/lien-thong
@@ -29,8 +43,8 @@ export class PhieuNhapController {
 
   // 2b. Liên thông cụ thể theo ID: POST /phieu-nhap/:id/lien-thong
   @Post(['phieu-nhap/:id/lien-thong', 'transactions/stock-in/:id/sync'])
-  syncById(@Param('id') id: string) {
-    return this.phieuNhapService.sync(id);
+  syncById(@Param('id') id: string, @Body() body?: any) {
+    return this.phieuNhapService.sync(id, body);
   }
 
   // 3. Xem trạng thái xử lý: GET /transactions/stock-in/:id/status hoặc GET /phieu-nhap/:id/status

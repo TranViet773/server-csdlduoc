@@ -1,4 +1,5 @@
-import { MasterUnit, MasterDrug, MasterDrugGroup, Supplier, StockInTransaction } from './types';
+import { MasterUnit, MasterDrug, MasterDrugGroup, Supplier, StockInTransaction, StockOutTransaction } from './types';
+
 
 // 1. Danh sách đơn vị tính chuẩn (GET /master/units hoặc GET /unit)
 export const mockUnits: MasterUnit[] = [
@@ -320,3 +321,104 @@ export const initialStockInTransactions: StockInTransaction[] = [
     ],
   },
 ];
+
+// 6. Danh sách phiếu xuất mẫu (Stock-Out) chuẩn QĐ 806
+export const initialStockOutTransactions: StockOutTransaction[] = [
+  {
+    transaction_id: 'PX-20261008-001',
+    transaction_date: '2026-10-08T10:30:00',
+    export_date: '2026-10-08',
+    reason: 'sale-retail',
+    reference_number: 'HD-BL-2026-0012',
+    practice_license_code: 'GCN-NT-01294',
+    note: 'Xuất bán lẻ cho khách vãng lai',
+    status: 'completed',
+    is_synced: true,
+    synced_at: '2026-10-08T10:35:10.123Z',
+    national_sync_id: 'CSDLD-SYNC-20261008-5521',
+    total_amount: 108000,
+    created_at: '2026-10-08T10:30:00.000Z',
+    updated_at: '2026-10-08T10:35:10.123Z',
+    items: [
+      {
+        drug_id: 'VN-22019-19',
+        drug_name: 'Panadol Extra Đỏ',
+        registration_number: 'VN-22019-19',
+        unit_id: 'U002',
+        unit_name: 'Vỉ',
+        quantity: 2,
+        batch_no: 'PAN-260815',
+        batch_number: 'PAN-260815',
+        packaging_specifications: 'Hộp 15 vỉ x 12 viên',
+        expiry_date: '2028-08-15',
+        gtin: '8935001200028',
+        price: 36000,
+        total_price: 72000,
+        manufacturer: {
+          id: 'NSX01',
+          name: 'GlaxoSmithKline Dungarvan Ltd.',
+          country: 'IRL',
+        },
+      },
+      {
+        drug_id: 'VD-28432-17',
+        drug_name: 'Hapacol 650',
+        registration_number: 'VD-28432-17',
+        unit_id: 'U002',
+        unit_name: 'Vỉ',
+        quantity: 3,
+        batch_no: 'LO-260901',
+        batch_number: 'LO-260901',
+        packaging_specifications: 'Hộp 10 vỉ x 10 viên',
+        expiry_date: '2028-09-01',
+        gtin: '8934567890130',
+        price: 12000,
+        total_price: 36000,
+        manufacturer: {
+          id: 'NSX02',
+          name: 'Công ty Cổ phần Dược Hậu Giang',
+          country: 'VNM',
+        },
+      },
+    ],
+  },
+  {
+    transaction_id: 'PX-20261009-002',
+    transaction_date: '2026-10-09T09:15:00',
+    export_date: '2026-10-09',
+    reason: 'return',
+    supplier_id: 'NCC001',
+    supplier_name: 'Công ty Cổ phần Dược Hậu Giang (DHG Pharma)',
+    reference_number: 'TL-DHG-2026-09',
+    practice_license_code: 'GCN-NT-01294',
+    note: 'Xuất trả nhà cung cấp do bao bì móp méo',
+    status: 'accepted',
+    is_synced: false,
+    total_amount: 360000,
+    created_at: '2026-10-09T09:15:00.000Z',
+    updated_at: '2026-10-09T09:15:00.000Z',
+    items: [
+      {
+        drug_id: 'VD-28432-17',
+        drug_name: 'Hapacol 650',
+        registration_number: 'VD-28432-17',
+        unit_id: 'U003',
+        unit_name: 'Hộp',
+        quantity: 5,
+        batch_no: 'LO-260901',
+        batch_number: 'LO-260901',
+        packaging_specifications: 'Hộp 10 vỉ x 10 viên',
+        expiry_date: '2028-09-01',
+        gtin: '8934567890147',
+        price: 72000,
+        total_price: 360000,
+        manufacturer: {
+          id: 'NSX02',
+          name: 'Công ty Cổ phần Dược Hậu Giang',
+          country: 'VNM',
+        },
+      },
+    ],
+  },
+];
+

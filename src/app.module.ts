@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MasterModule } from './modules/master/master.module';
 import { PhieuNhapModule } from './modules/phieu-nhap/phieu-nhap.module';
+import { PhieuXuatModule } from './modules/phieu-xuat/phieu-xuat.module';
 import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [MasterModule, PhieuNhapModule, AuthModule],
+  imports: [MasterModule, PhieuNhapModule, PhieuXuatModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
