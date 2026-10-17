@@ -163,24 +163,17 @@ export class PhieuXuatService {
     return found;
   }
 
-  // 3. Xem trạng thái xử lý phiếu xuất: GET /transactions/stock-out/:id/status (Mục 5.4.6 QĐ 806)
+  // 3. Xem trạng thái xử lý phiếu xuất: GET /transactions/stock-out/:id/status (Mục 5.4.6 QĐ 232)
   getStatus(id: string) {
     const item = this.findById(id);
     return {
       transaction_id: item.transaction_id,
       status: item.status,
-      is_synced: item.is_synced,
-      synced_at: item.synced_at || null,
-      national_sync_id: item.national_sync_id || null,
       messages:
         item.status === 'completed'
-          ? ['Phiếu xuất đã được xử lý và liên thông thành công lên Cổng CSDL Dược Quốc Gia']
+          ? []
           : ['Dữ liệu đã được hệ thống tiếp nhận để xử lý'],
       submitted_at: item.created_at,
-      message:
-        item.status === 'completed'
-          ? 'Phiếu xuất đã được xử lý và liên thông thành công'
-          : 'Dữ liệu đã được hệ thống tiếp nhận để xử lý',
     };
   }
 
@@ -367,11 +360,8 @@ export class PhieuXuatService {
     console.log(`[Phiếu Xuất] 📦 Nhận phiếu xuất mới thành công! Mã: ${transactionId} (Số CT: ${newTransaction.reference_number}, Tổng tiền: ${totalAmount.toLocaleString()}đ, Số món: ${enrichedItems.length})`);
 
     return {
-      code: 200,
-      message: 'Tạo phiếu xuất hàng thành công (Sandbox CSDL Dược)',
       transaction_id: transactionId,
       status: 'accepted',
-      data: newTransaction,
     };
   }
 

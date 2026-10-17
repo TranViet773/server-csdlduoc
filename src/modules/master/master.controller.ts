@@ -33,18 +33,63 @@ export class MasterController {
     return this.masterService.getDrugById(id);
   }
 
-  // 4. Danh mục nhóm thuốc: GET /nhom-thuoc, GET /master/drug-groups
+  // 4. Danh mục nhóm thuốc: GET /master/drug-groups, GET /v2/master/drug-groups (Mục 5.2.3 QĐ 232)
   @Get(['nhom-thuoc', 'master/drug-groups', 'v2/master/drug-groups'])
-  getDrugGroups() {
-    return {
-      total: this.masterService.getDrugGroups().length,
-      data: this.masterService.getDrugGroups(),
-    };
+  getDrugGroups(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.masterService.getDrugGroups(page, pageSize);
   }
 
-  // 5. Danh mục nhà cung cấp: GET /nha-cung-cap, GET /master/suppliers, GET /v2/master/suppliers
-  @Get(['nha-cung-cap', 'master/suppliers', 'v2/master/suppliers'])
+  // 5. Danh mục quốc gia: GET /master/countries, GET /v2/master/countries (Mục 5.2.2 QĐ 232)
+  @Get(['master/countries', 'v2/master/countries'])
+  getCountries(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.masterService.getCountries(page, pageSize);
+  }
 
+  // 6. Danh mục đường dùng: GET /master/routes, GET /v2/master/routes (Mục 5.2.4 QĐ 232)
+  @Get(['master/routes', 'v2/master/routes'])
+  getRoutes(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.masterService.getRoutes(page, pageSize);
+  }
+
+  // 7. Danh mục nhà sản xuất: GET /master/manufacturers, GET /v2/master/manufacturers (Mục 5.2.5 QĐ 232)
+  @Get(['master/manufacturers', 'v2/master/manufacturers'])
+  getManufacturers(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.masterService.getManufacturers(page, pageSize);
+  }
+
+  // 8. Danh mục tỉnh/thành phố: GET /master/provinces, GET /v2/master/provinces (Mục 5.2.6 QĐ 232)
+  @Get(['master/provinces', 'v2/master/provinces'])
+  getProvinces(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+  ) {
+    return this.masterService.getProvinces(page, pageSize);
+  }
+
+  // 9. Danh mục xã/phường: GET /master/communes, GET /v2/master/communes (Mục 5.2.7 QĐ 232)
+  @Get(['master/communes', 'v2/master/communes'])
+  getCommunes(
+    @Query('page') page?: number,
+    @Query('page_size') pageSize?: number,
+    @Query('province_id') provinceId?: string,
+  ) {
+    return this.masterService.getCommunes(page, pageSize, provinceId);
+  }
+
+  // 10. Danh mục nhà cung cấp: GET /nha-cung-cap, GET /master/suppliers, GET /v2/master/suppliers
+  @Get(['nha-cung-cap', 'master/suppliers', 'v2/master/suppliers'])
   getSuppliers() {
     return {
       total: this.masterService.getSuppliers().length,

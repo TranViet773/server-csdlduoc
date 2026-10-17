@@ -1,5 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { mockUnits, mockDrugs, mockDrugGroups, mockSuppliers } from '../../data/mockData';
+import {
+  mockUnits,
+  mockDrugs,
+  mockDrugGroups,
+  mockSuppliers,
+  mockCountries,
+  mockRoutes,
+  mockManufacturers,
+  mockProvinces,
+  mockCommunes,
+} from '../../data/mockData';
 import { MasterUnit, MasterDrug, MasterDrugGroup, Supplier } from '../../data/types';
 
 @Injectable()
@@ -77,9 +87,80 @@ export class MasterService {
     return drug;
   }
 
-  // Lấy danh mục nhóm thuốc
-  getDrugGroups(): MasterDrugGroup[] {
-    return mockDrugGroups;
+  // Lấy danh mục nhóm thuốc (Mục 5.2.3 QĐ 232)
+  getDrugGroups(page: number = 1, pageSize: number = 20) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: mockDrugGroups.length,
+      data: mockDrugGroups.slice(start, start + size),
+    };
+  }
+
+  // Lấy danh mục quốc gia (Mục 5.2.2 QĐ 232)
+  getCountries(page: number = 1, pageSize: number = 20) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: mockCountries.length,
+      data: mockCountries.slice(start, start + size),
+    };
+  }
+
+  // Lấy danh mục đường dùng (Mục 5.2.4 QĐ 232)
+  getRoutes(page: number = 1, pageSize: number = 20) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: mockRoutes.length,
+      data: mockRoutes.slice(start, start + size),
+    };
+  }
+
+  // Lấy danh mục nhà sản xuất (Mục 5.2.5 QĐ 232)
+  getManufacturers(page: number = 1, pageSize: number = 20) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: mockManufacturers.length,
+      data: mockManufacturers.slice(start, start + size),
+    };
+  }
+
+  // Lấy danh mục tỉnh/thành phố (Mục 5.2.6 QĐ 232)
+  getProvinces(page: number = 1, pageSize: number = 20) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: mockProvinces.length,
+      data: mockProvinces.slice(start, start + size),
+    };
+  }
+
+  // Lấy danh mục xã/phường (Mục 5.2.7 QĐ 232)
+  getCommunes(page: number = 1, pageSize: number = 20, provinceId?: string) {
+    const p = Math.max(1, Number(page) || 1);
+    const size = Math.min(50, Math.max(1, Number(pageSize) || 20));
+    let list = mockCommunes;
+    if (provinceId) {
+      list = list.filter((c) => c.province_id === provinceId);
+    }
+    const start = (p - 1) * size;
+    return {
+      page: p,
+      total: list.length,
+      data: list.slice(start, start + size),
+    };
   }
 
   // Lấy danh mục nhà cung cấp

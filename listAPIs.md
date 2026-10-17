@@ -41,13 +41,7 @@ Lấy JWT Token để xác thực các API nghiệp vụ.
 {
   "access_token": "mock_csdlduoc_token_bmhhdGh1b2NfdmlldA==_1791386456395",
   "token_type": "Bearer",
-  "expires_in": 86400,
-  "facility": {
-    "username": "nhathuoc_viet",
-    "facility_name": "Nhà thuốc Sandbox Test",
-    "license_code": "GCN-NT-01294",
-    "environment": "sandbox"
-  }
+  "expires_in": 86400
 }
 ```
 

@@ -25,6 +25,62 @@ export const mockDrugGroups: MasterDrugGroup[] = [
   { id: 'DG06', name: 'Thuốc tim mạch, huyết áp' },
 ];
 
+// 2.1. Danh mục quốc gia (GET /master/countries - Mục 5.2.2 QĐ 232)
+export const mockCountries = [
+  { id: 'VN', name: 'Việt Nam' },
+  { id: 'GB', name: 'Vương quốc Anh (UK)' },
+  { id: 'FR', name: 'Pháp' },
+  { id: 'DE', name: 'Đức' },
+  { id: 'CH', name: 'Thụy Sĩ' },
+  { id: 'SE', name: 'Thụy Điển' },
+  { id: 'US', name: 'Hoa Kỳ' },
+  { id: 'IN', name: 'Ấn Độ' },
+  { id: 'JP', name: 'Nhật Bản' },
+  { id: 'KR', name: 'Hàn Quốc' },
+];
+
+// 2.2. Danh mục đường dùng (GET /master/routes - Mục 5.2.4 QĐ 232)
+export const mockRoutes = [
+  { id: 'R01', name: 'Đường uống (PO)' },
+  { id: 'R02', name: 'Tiêm tĩnh mạch (IV)' },
+  { id: 'R03', name: 'Tiêm bắp (IM)' },
+  { id: 'R04', name: 'Bôi ngoài da' },
+  { id: 'R05', name: 'Nhỏ mắt / tai / mũi' },
+  { id: 'R06', name: 'Xịt hít / Khí dung' },
+  { id: 'R07', name: 'Ngậm dưới lưỡi' },
+  { id: 'R08', name: 'Đặt trực tràng / âm đạo' },
+];
+
+// 2.3. Danh mục nhà sản xuất (GET /master/manufacturers - Mục 5.2.5 QĐ 232)
+export const mockManufacturers = [
+  { id: 'NSX01', name: 'GlaxoSmithKline Dungarvan Ltd.', country_id: 'IRL', province_id: '92', commune_id: '9201', street: 'Knockbrack, Dungarvan, Co. Waterford' },
+  { id: 'NSX02', name: 'Công ty Cổ phần Dược Hậu Giang', country_id: 'VN', province_id: '92', commune_id: '9202', street: '288 Nguyễn Văn Cừ, Cần Thơ' },
+  { id: 'NSX03', name: 'Glaxo Wellcome Production', country_id: 'FR', province_id: '01', commune_id: '0101', street: 'Zone Industrielle du Peyrat, Mayenne' },
+  { id: 'NSX04', name: 'Công ty Cổ phần Dược phẩm OPC', country_id: 'VN', province_id: '79', commune_id: '7901', street: '1017 Hồng Bàng, Quận 6, TP. HCM' },
+  { id: 'NSX05', name: 'Công ty Cổ phần Traphaco', country_id: 'VN', province_id: '01', commune_id: '0102', street: '75 Yên Ninh, Ba Đình, Hà Nội' },
+];
+
+// 2.4. Danh mục tỉnh/thành phố (GET /master/provinces - Mục 5.2.6 QĐ 232)
+export const mockProvinces = [
+  { id: '01', name: 'Thành phố Hà Nội' },
+  { id: '79', name: 'Thành phố Hồ Chí Minh' },
+  { id: '48', name: 'Thành phố Đà Nẵng' },
+  { id: '31', name: 'Thành phố Hải Phòng' },
+  { id: '92', name: 'Thành phố Cần Thơ' },
+  { id: '74', name: 'Tỉnh Bình Dương' },
+  { id: '75', name: 'Tỉnh Đồng Nai' },
+];
+
+// 2.5. Danh mục xã/phường (GET /master/communes - Mục 5.2.7 QĐ 232)
+export const mockCommunes = [
+  { id: '0101', name: 'Phường Giảng Võ', province_id: '01' },
+  { id: '0102', name: 'Phường Quán Thánh', province_id: '01' },
+  { id: '7901', name: 'Phường Bến Nghé', province_id: '79' },
+  { id: '7902', name: 'Phường Đa Kao', province_id: '79' },
+  { id: '4801', name: 'Phường Hải Châu 1', province_id: '48' },
+  { id: '9201', name: 'Phường An Hòa', province_id: '92' },
+];
+
 // 3. Danh mục nhà cung cấp
 export const mockSuppliers: Supplier[] = [
   {

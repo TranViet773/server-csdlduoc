@@ -1,0 +1,491 @@
+{
+  "info": {
+    "_postman_id": "c8a1b2d3-9f8e-4a7b-b5c6-7d8e9f0a1b2c",
+    "name": "CSDL Dược Quốc Gia - QĐ 232/QĐ-TTYQG & QĐ 806",
+    "description": "Bộ sưu tập đầy đủ 19 APIs liên thông CSDL Dược Quốc Gia theo Quyết định 232/QĐ-TTYQG (Bộ Y Tế ngày 17/07/2026) và QĐ 806. Tự động lưu access_token sau khi gọi API login.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Xác thực (Auth)",
+      "item": [
+        {
+          "name": "POST /auth/login (Đăng nhập cấp Access Token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var json = pm.response.json();",
+                  "    if (json.access_token) {",
+                  "        pm.collectionVariables.set('token', json.access_token);",
+                  "        console.log('Đã lưu access_token vào biến collection: ' + json.access_token);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"nhathuoc_viet\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Mục 5.1.1 QĐ 232: Xác thực tài khoản cấp JWT Token (access_token, token_type, expires_in)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Danh mục dùng chung (Master Data)",
+      "item": [
+        {
+          "name": "GET /master/units (Danh mục đơn vị tính)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/units?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "units"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.1 QĐ 232: Lấy danh mục đơn vị tính (Viên, Vỉ, Hộp...)."
+          }
+        },
+        {
+          "name": "GET /master/countries (Danh mục quốc gia)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/countries?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "countries"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.2 QĐ 232: Lấy danh mục quốc gia (mã ISO-3166)."
+          }
+        },
+        {
+          "name": "GET /master/drug-groups (Danh mục nhóm thuốc)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/drug-groups?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "drug-groups"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.3 QĐ 232: Lấy danh mục nhóm thuốc."
+          }
+        },
+        {
+          "name": "GET /master/routes (Danh mục đường dùng)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/routes?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "routes"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.4 QĐ 232: Lấy danh mục đường dùng thuốc (uống, tiêm, bôi ngoài da...)."
+          }
+        },
+        {
+          "name": "GET /master/manufacturers (Danh mục nhà sản xuất)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/manufacturers?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "manufacturers"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.5 QĐ 232: Lấy danh mục nhà sản xuất thuốc."
+          }
+        },
+        {
+          "name": "GET /master/provinces (Danh mục Tỉnh/Thành phố)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/provinces?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "provinces"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" }
+              ]
+            },
+            "description": "Mục 5.2.6 QĐ 232: Lấy danh mục 63 Tỉnh/Thành phố."
+          }
+        },
+        {
+          "name": "GET /master/communes (Danh mục Xã/Phường)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/communes?page=1&page_size=20&province_id=01",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "communes"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" },
+                { "key": "province_id", "value": "01" }
+              ]
+            },
+            "description": "Mục 5.2.7 QĐ 232: Lấy danh mục Xã/Phường theo mã tỉnh."
+          }
+        },
+        {
+          "name": "GET /master/suppliers (Danh mục Nhà cung cấp)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/suppliers",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "suppliers"]
+            },
+            "description": "Lấy danh mục Nhà cung cấp dược phẩm."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Thuốc (Drugs)",
+      "item": [
+        {
+          "name": "GET /master/drugs (Tra cứu danh mục thuốc)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/drugs?page=1&page_size=20&search=panadol",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "drugs"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "page_size", "value": "20" },
+                { "key": "search", "value": "panadol" }
+              ]
+            },
+            "description": "Mục 5.3.1 QĐ 232: Tra cứu danh mục thuốc chuẩn quốc gia."
+          }
+        },
+        {
+          "name": "GET /master/drugs/:drug_id (Chi tiết thuốc theo SĐK/Mã)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master/drugs/VN-22019-19",
+              "host": ["{{baseUrl}}"],
+              "path": ["master", "drugs", "VN-22019-19"]
+            },
+            "description": "Mục 5.3.2 QĐ 232: Xem thông tin chi tiết một thuốc."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Giao dịch Nhập kho (Stock-in)",
+      "item": [
+        {
+          "name": "POST /transactions/stock-in (Tạo phiếu nhập kho)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_date\": \"2026-10-17T10:00:00\",\n  \"reason\": \"supplier\",\n  \"supplier_id\": \"NCC001\",\n  \"reference_number\": \"HD-TEST-001\",\n  \"practice_license_code\": \"GCN-NT-01294\",\n  \"note\": \"Nhập hàng từ Công ty CP Dược Hậu Giang\",\n  \"items\": [\n    {\n      \"drug_id\": \"VN-22019-19\",\n      \"unit_id\": \"U001\",\n      \"quantity\": 100,\n      \"batch_no\": \"24B02\",\n      \"packaging_specifications\": \"Hộp 15 vỉ x 12 viên\",\n      \"expiry_date\": \"2028-08-15\",\n      \"gtin\": \"8935001200028\",\n      \"price\": 36000,\n      \"manufacturer\": {\n        \"id\": \"NSX01\",\n        \"name\": \"GlaxoSmithKline Dungarvan Ltd.\",\n        \"country\": \"IRL\"\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-in",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-in"]
+            },
+            "description": "Mục 5.4.1 QĐ 232: Tạo giao dịch nhập kho."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-in/:id (Xem chi tiết phiếu nhập)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-in/PN-20261010-001",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-in", "PN-20261010-001"]
+            },
+            "description": "Mục 5.4.2 QĐ 232: Xem chi tiết phiếu nhập kho."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-in/:id/status (Xem trạng thái xử lý)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-in/PN-20261010-001/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-in", "PN-20261010-001", "status"]
+            },
+            "description": "Mục 5.4.3 QĐ 232: Xem trạng thái xử lý của phiếu nhập kho."
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Giao dịch Xuất kho (Stock-out)",
+      "item": [
+        {
+          "name": "POST /transactions/stock-out (Tạo phiếu xuất hàng)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_date\": \"2026-10-17T14:30:00\",\n  \"reason\": \"sale-retail\",\n  \"reference_number\": \"HD-BL-001\",\n  \"practice_license_code\": \"GCN-NT-01294\",\n  \"note\": \"Bán lẻ thuốc cho khách hàng\",\n  \"items\": [\n    {\n      \"drug_id\": \"VN-22019-19\",\n      \"unit_id\": \"U001\",\n      \"quantity\": 2,\n      \"batch_no\": \"24B02\",\n      \"packaging_specifications\": \"Hộp 15 vỉ x 12 viên\",\n      \"expiry_date\": \"2028-08-15\",\n      \"gtin\": \"8935001200028\",\n      \"price\": 40000\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-out",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-out"]
+            },
+            "description": "Mục 5.4.4 QĐ 232: Tạo giao dịch xuất kho (bán lẻ, trả lại NCC, hủy...)."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-out/:id (Xem chi tiết phiếu xuất)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-out/PX-20261009-001",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-out", "PX-20261009-001"]
+            },
+            "description": "Mục 5.4.5 QĐ 232: Xem thông tin chi tiết phiếu xuất hàng."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-out/:id/status (Xem trạng thái xử lý)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-out/PX-20261009-001/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-out", "PX-20261009-001", "status"]
+            },
+            "description": "Mục 5.4.6 QĐ 232: Xem trạng thái xử lý phiếu xuất hàng."
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Giao dịch Kiểm kho (Stock-taking)",
+      "item": [
+        {
+          "name": "POST /transactions/stock-taking (Tạo phiếu kiểm kho)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_date\": \"2026-10-17T17:00:00\",\n  \"reference_number\": \"PKK-20261017-01\",\n  \"store_id\": \"HN-NT-8892\",\n  \"warehouse_id\": \"KHO-01\",\n  \"practice_license_code\": \"GCN-HN-00892/GPP\",\n  \"note\": \"Kiểm kê định kỳ tháng 10/2026\",\n  \"items\": [\n    {\n      \"drug_id\": \"VN-22019-19\",\n      \"unit_id\": \"U001\",\n      \"quantity\": 98,\n      \"batch_no\": \"24B02\",\n      \"packaging_specifications\": \"Hộp 15 vỉ x 12 viên\",\n      \"expiry_date\": \"2028-08-15\",\n      \"price\": 36000,\n      \"system_quantity\": 100,\n      \"actual_quantity\": 98\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-taking",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-taking"]
+            },
+            "description": "Mục 5.4.7 QĐ 232: Tạo phiếu kiểm kho đối soát số lượng tồn hệ thống và thực tế."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-taking/:id (Xem chi tiết phiếu kiểm kho)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-taking/PKK-20261017-01",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-taking", "PKK-20261017-01"]
+            },
+            "description": "Mục 5.4.8 QĐ 232: Xem chi tiết phiếu kiểm kho."
+          }
+        },
+        {
+          "name": "GET /transactions/stock-taking/:id/status (Xem trạng thái xử lý)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/stock-taking/PKK-20261017-01/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "stock-taking", "PKK-20261017-01", "status"]
+            },
+            "description": "Mục 5.4.9 QĐ 232: Xem trạng thái xử lý phiếu kiểm kho."
+          }
+        }
+      ]
+    }
+  ]
+}

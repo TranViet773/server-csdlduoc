@@ -248,24 +248,17 @@ export class PhieuNhapService {
     return found;
   }
 
-  // 3. Xem trạng thái xử lý phiếu nhập: GET /transactions/stock-in/:id/status (Mục 5.4.3 QĐ 806)
+  // 3. Xem trạng thái xử lý phiếu nhập: GET /transactions/stock-in/:id/status (Mục 5.4.3 QĐ 232)
   getStatus(id: string) {
     const item = this.findById(id);
     return {
       transaction_id: item.transaction_id,
       status: item.status,
-      is_synced: item.is_synced,
-      synced_at: item.synced_at || null,
-      national_sync_id: item.national_sync_id || null,
       messages:
         item.status === 'completed'
-          ? ['Phiếu nhập đã được xử lý và liên thông thành công lên Cổng CSDL Dược Quốc Gia']
+          ? []
           : ['Dữ liệu đã được hệ thống tiếp nhận để xử lý'],
       submitted_at: item.created_at,
-      message:
-        item.status === 'completed'
-          ? 'Phiếu nhập đã được xử lý và liên thông thành công'
-          : 'Dữ liệu đã được hệ thống tiếp nhận để xử lý',
     };
   }
 
@@ -460,11 +453,8 @@ export class PhieuNhapService {
     console.log(`[Phiếu Nhập] 📦 Nhận phiếu nhập mới thành công! Mã: ${transactionId} (Số CT: ${newTransaction.reference_number}, Tổng tiền: ${totalAmount.toLocaleString()}đ, Số món: ${enrichedItems.length})`);
 
     return {
-      code: 200,
-      message: 'Tạo phiếu nhập hàng thành công (Sandbox CSDL Dược)',
       transaction_id: transactionId,
       status: 'accepted',
-      data: newTransaction,
     };
   }
 
@@ -617,7 +607,7 @@ export class PhieuNhapService {
       // Trường hợp client gửi liên thông trực tiếp với đầy đủ items mà chưa tạo trước đó
       if (typeof idOrDto === 'object' && Array.isArray(idOrDto.items) && idOrDto.items.length > 0) {
         const created = this.create(idOrDto);
-        item = created.data;
+        item = this.findById(created.transaction_id);
       } else {
         throw e;
       }

@@ -38,17 +38,11 @@ export class AuthService {
       });
     }
 
-    // Trả về response đúng định dạng mục 5.1 Quyết định 806
+    // Trả về response đúng định dạng mục 5.1 Quyết định 806 (chỉ 3 trường: access_token, token_type, expires_in)
     return {
       access_token: `mock_csdlduoc_token_${Buffer.from(username).toString('base64')}_${Date.now()}`,
       token_type: 'Bearer',
       expires_in: 86400, // 24 giờ
-      facility: {
-        username,
-        facility_name: 'Nhà thuốc Sandbox Test',
-        license_code: 'GCN-NT-01294',
-        environment: 'sandbox',
-      },
     };
   }
 }
