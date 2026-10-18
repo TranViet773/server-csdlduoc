@@ -88,8 +88,8 @@ export class MasterController {
     return this.masterService.getCommunes(page, pageSize, provinceId);
   }
 
-  // 10. Danh mục nhà cung cấp: GET /nha-cung-cap, GET /master/suppliers, GET /v2/master/suppliers
-  @Get(['nha-cung-cap', 'master/suppliers', 'v2/master/suppliers'])
+  // Tiện ích hỗ trợ nội bộ: GET /nha-cung-cap
+  @Get('nha-cung-cap')
   getSuppliers() {
     return {
       total: this.masterService.getSuppliers().length,
